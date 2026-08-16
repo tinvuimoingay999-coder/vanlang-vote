@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Xác Nhận Thành Công - Miss & Mister Văn Lang 2026</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', sans-serif; }
+        body {
+            background: linear-gradient(135deg, #2B0764 0%, #1A053C 50%, #0F0324 100%);
+            color: white;
+            min-height: 100vh;
+        }
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 50px;
+        }
+        .logo-text h3 { color: #FFD700; font-size: 18px; }
+        nav a { color: white; text-decoration: none; margin: 0 15px; font-weight: 500; }
+        .btn-vote {
+            background: linear-gradient(90deg, #7B2FFD, #9D4FFE);
+            padding: 10px 25px;
+            border-radius: 30px;
+            color: white;
+            text-decoration: none;
+            font-weight: bold;
+        }
+        .container {
+            max-width: 700px;
+            margin: 0 auto;
+            padding: 60px 20px;
+            text-align: center;
+        }
+        .check-icon {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            background: linear-gradient(90deg, #FFD700, #FFB800);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 30px;
+            font-size: 40px;
+            color: #2B0764;
+            box-shadow: 0 0 20px rgba(255, 215, 0, 0.4);
+        }
+        h1 {
+            font-size: 52px;
+            background: linear-gradient(90deg, #FFD700, #FFF7B8);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 20px;
+        }
+        .divider {
+            width: 100px;
+            height: 3px;
+            background: linear-gradient(90deg, #FFD700, #FFB800);
+            margin: 0 auto 30px;
+            border-radius: 3px;
+        }
+        .card {
+            background: rgba(43, 7, 100, 0.6);
+            border: 1px solid rgba(123, 47, 253, 0.5);
+            border-radius: 20px;
+            padding: 50px 30px;
+            box-shadow: 0 0 40px rgba(123, 47, 253, 0.3);
+        }
+        .card p {
+            font-size: 18px;
+            line-height: 1.8;
+            color: #E0E0E0;
+            margin-bottom: 20px;
+        }
+        .highlight {
+            color: #FFD700;
+            font-weight: bold;
+            font-size: 20px;
+        }
+        footer {
+            text-align: center;
+            padding: 30px;
+            margin-top: 50px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        @media (max-width: 768px) {
+            header { padding: 20px; flex-direction: column; gap: 20px; }
+            nav { display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; }
+            nav a { margin: 0 5px; }
+            h1 { font-size: 38px; }
+            .container { padding: 40px 15px; }
+            .card { padding: 40px 20px; }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="logo-text">
+            <h3>VAN LANG UNIVERSITY 2026</h3>
+        </div>
+        <nav>
+            <a href="index.html">Trang chủ</a>
+            <a href="#">Thể lệ</a>
+            <a href="#">Thí sinh</a>
+            <a href="#">Bảng xếp hạng</a>
+            <a href="#">Tin tức</a>
+            <a href="index.html" class="btn-vote">BÌNH CHỌN NGAY</a>
+        </nav>
+    </header>
+
+    <div class="container">
+        <div class="card">
+            <div class="check-icon">✓</div>
+            <h1>THƯ CẢM ƠN!</h1>
+            <div class="divider"></div>
+
+            <p>Cảm ơn bạn đã tham gia bình chọn<br>
+            <strong>Miss & Mister Văn Lang University 2026.</strong></p>
+
+            <p>Sự ủng hộ của bạn là nguồn động viên to lớn<br>
+            giúp thí sinh tỏa sáng và chạm đến ước mơ.</p>
+
+            <p class="highlight">📌 Liên hệ người gửi link để thực hiện bước cuối<br>
+            và hoàn tất quá trình bình chọn.</p>
+        </div>
+    </div>
+
+    <footer>
+        <p>© 2026 Van Lang University. All rights reserved.</p>
+        <p>Hotline: 1900 1234 | Email: contact@vlu.edu.vn</p>
+    </footer>
+</body>
+</html>
